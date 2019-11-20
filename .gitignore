@@ -1,0 +1,5 @@
+output.txt
+*.iml
+build/
+.gradle
+.idea
