@@ -29,35 +29,22 @@ public class MainLauncher {
         scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
 
         for (int tItr = 0; tItr < t; tItr++) {
-            String[] RC = scanner.nextLine().split(" ");
+            int n = scanner.nextInt();
+            scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
 
-            int R = Integer.parseInt(RC[0]);
+            int[] arr = new int[n];
 
-            int C = Integer.parseInt(RC[1]);
+            String[] arrItems = scanner.nextLine().split(" ");
+            scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
 
-            String[] G = new String[R];
-
-            for (int i = 0; i < R; i++) {
-                String GItem = scanner.nextLine();
-                G[i] = GItem;
+            for (int i = 0; i < n; i++) {
+                int arrItem = Integer.parseInt(arrItems[i]);
+                arr[i] = arrItem;
             }
 
-            String[] rc = scanner.nextLine().split(" ");
+            int result = InsertionSort.insertionSort(arr);
 
-            int r = Integer.parseInt(rc[0]);
-
-            int c = Integer.parseInt(rc[1]);
-
-            String[] P = new String[r];
-
-            for (int i = 0; i < r; i++) {
-                String PItem = scanner.nextLine();
-                P[i] = PItem;
-            }
-
-            String result = GridSearch.gridSearch(G, P);
-
-            bufferedWriter.write(result);
+            bufferedWriter.write(String.valueOf(result));
             bufferedWriter.newLine();
         }
 
