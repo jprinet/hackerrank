@@ -42,7 +42,7 @@ public class MainLauncher {
                 arr[i] = arrItem;
             }
 
-            int result = InsertionSort.insertionSort(arr);
+            long result = InsertionSort.insertionSort(arr);
 
             bufferedWriter.write(String.valueOf(result));
             bufferedWriter.newLine();
