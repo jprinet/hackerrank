@@ -7,9 +7,8 @@ import java.util.Scanner;
 
 public class MainLauncher {
 
-    private static final String PATH = "test/src/main/resources/";
+    private static final String PATH = "src/main/resources/";
 
-    //    private static final Scanner scanner = new Scanner(System.in);
     private static Scanner scanner;
 
     static {
