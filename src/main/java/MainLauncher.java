@@ -24,29 +24,33 @@ public class MainLauncher {
 
         BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(PATH + System.getenv("OUTPUT_PATH")));
 
-        int t = scanner.nextInt();
+        String[] nk = scanner.nextLine().split(" ");
+
+        int n = Integer.parseInt(nk[0]);
+
+        int k = Integer.parseInt(nk[1]);
+
+        int[] A = new int[k];
+
+        String[] AItems = scanner.nextLine().split(" ");
         scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
 
-        for (int tItr = 0; tItr < t; tItr++) {
-            int n = scanner.nextInt();
-            scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
-
-            int[] arr = new int[n];
-
-            String[] arrItems = scanner.nextLine().split(" ");
-            scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
-
-            for (int i = 0; i < n; i++) {
-                int arrItem = Integer.parseInt(arrItems[i]);
-                arr[i] = arrItem;
-            }
-
-            long result = InsertionSort.insertionSort(arr);
-
-            bufferedWriter.write(String.valueOf(result));
-            bufferedWriter.newLine();
+        for (int i = 0; i < k; i++) {
+            int AItem = Integer.parseInt(AItems[i]);
+            A[i] = AItem;
         }
 
+        int[] result = KFactorization.kFactorization(n, A);
+
+        for (int i = 0; i < result.length; i++) {
+            bufferedWriter.write(String.valueOf(result[i]));
+
+            if (i != result.length - 1) {
+                bufferedWriter.write(" ");
+            }
+        }
+
+        bufferedWriter.newLine();
         bufferedWriter.close();
 
         scanner.close();
