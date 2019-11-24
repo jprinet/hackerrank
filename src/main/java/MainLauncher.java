@@ -24,35 +24,18 @@ public class MainLauncher {
 
         BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(PATH + System.getenv("OUTPUT_PATH")));
 
-        String[] nk = scanner.nextLine().split(" ");
-
-        int n = Integer.parseInt(nk[0]);
-
-        int k = Integer.parseInt(nk[1]);
-
-        int[] A = new int[k];
-
-        String[] AItems = scanner.nextLine().split(" ");
+        int h = scanner.nextInt();
         scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
 
-        for (int i = 0; i < k; i++) {
-            int AItem = Integer.parseInt(AItems[i]);
-            A[i] = AItem;
-        }
+        int m = scanner.nextInt();
+        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
 
-        int[] result = KFactorization.kFactorization(n, A);
+        String result = TimeInWords.timeInWords(h, m);
 
-        for (int i = 0; i < result.length; i++) {
-            bufferedWriter.write(String.valueOf(result[i]));
-
-            if (i != result.length - 1) {
-                bufferedWriter.write(" ");
-            }
-        }
-
+        bufferedWriter.write(result);
         bufferedWriter.newLine();
-        bufferedWriter.close();
 
+        bufferedWriter.close();
         scanner.close();
 
         System.out.println("processed in " + (System.currentTimeMillis() - startTime) + "ms");
