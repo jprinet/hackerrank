@@ -3,7 +3,12 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
+
+import static java.util.stream.Collectors.toList;
 
 public class MainLauncher {
 
@@ -24,23 +29,25 @@ public class MainLauncher {
 
         BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(PATH + System.getenv("OUTPUT_PATH")));
 
-        int n = scanner.nextInt();
-        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+        int t = Integer.parseInt(scanner.nextLine().trim());
 
-        int[] arr = new int[n];
+        IntStream.range(0, t).forEach(tItr -> {
+            try {
+                int n = Integer.parseInt(scanner.nextLine().trim());
 
-        String[] arrItems = scanner.nextLine().split(" ");
-        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+                List<String> passwords = Stream.of(scanner.nextLine().replaceAll("\\s+$", "").split(" "))
+                                               .collect(toList());
 
-        for (int i = 0; i < n; i++) {
-            int arrItem = Integer.parseInt(arrItems[i]);
-            arr[i] = arrItem;
-        }
+                String loginAttempt = scanner.nextLine();
 
-        long result = LilysHomeworks.lilysHomework(arr);
+                String result = PasswordCracker.passwordCracker(passwords, loginAttempt);
 
-        bufferedWriter.write(String.valueOf(result));
-        bufferedWriter.newLine();
+                bufferedWriter.write(result);
+                bufferedWriter.newLine();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
 
         bufferedWriter.close();
         scanner.close();
