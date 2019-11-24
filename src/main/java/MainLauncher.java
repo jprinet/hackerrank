@@ -24,15 +24,42 @@ public class MainLauncher {
 
         BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(PATH + System.getenv("OUTPUT_PATH")));
 
-        String[] nk = scanner.nextLine().split(" ");
+        int scoresCount = scanner.nextInt();
+        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
 
-        String n = nk[0];
+        int[] scores = new int[scoresCount];
 
-        int k = Integer.parseInt(nk[1]);
+        String[] scoresItems = scanner.nextLine().split(" ");
+        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
 
-        int result = SuperDigitSum.superDigit(n, k);
+        for (int i = 0; i < scoresCount; i++) {
+            int scoresItem = Integer.parseInt(scoresItems[i]);
+            scores[i] = scoresItem;
+        }
 
-        bufferedWriter.write(String.valueOf(result));
+        int aliceCount = scanner.nextInt();
+        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+
+        int[] alice = new int[aliceCount];
+
+        String[] aliceItems = scanner.nextLine().split(" ");
+        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+
+        for (int i = 0; i < aliceCount; i++) {
+            int aliceItem = Integer.parseInt(aliceItems[i]);
+            alice[i] = aliceItem;
+        }
+
+        int[] result = LeaderBoard.climbingLeaderboard(scores, alice);
+
+        for (int i = 0; i < result.length; i++) {
+            bufferedWriter.write(String.valueOf(result[i]));
+
+            if (i != result.length - 1) {
+                bufferedWriter.write("\n");
+            }
+        }
+
         bufferedWriter.newLine();
 
         bufferedWriter.close();
