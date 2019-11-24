@@ -24,15 +24,22 @@ public class MainLauncher {
 
         BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(PATH + System.getenv("OUTPUT_PATH")));
 
-        int h = scanner.nextInt();
+        int n = scanner.nextInt();
         scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
 
-        int m = scanner.nextInt();
+        int[] arr = new int[n];
+
+        String[] arrItems = scanner.nextLine().split(" ");
         scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
 
-        String result = TimeInWords.timeInWords(h, m);
+        for (int i = 0; i < n; i++) {
+            int arrItem = Integer.parseInt(arrItems[i]);
+            arr[i] = arrItem;
+        }
 
-        bufferedWriter.write(result);
+        long result = LilysHomeworks.lilysHomework(arr);
+
+        bufferedWriter.write(String.valueOf(result));
         bufferedWriter.newLine();
 
         bufferedWriter.close();
