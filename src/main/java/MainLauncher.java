@@ -3,12 +3,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.List;
 import java.util.Scanner;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
-
-import static java.util.stream.Collectors.toList;
 
 public class MainLauncher {
 
@@ -29,25 +24,16 @@ public class MainLauncher {
 
         BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(PATH + System.getenv("OUTPUT_PATH")));
 
-        int t = Integer.parseInt(scanner.nextLine().trim());
+        String[] nk = scanner.nextLine().split(" ");
 
-        IntStream.range(0, t).forEach(tItr -> {
-            try {
-                int n = Integer.parseInt(scanner.nextLine().trim());
+        String n = nk[0];
 
-                List<String> passwords = Stream.of(scanner.nextLine().replaceAll("\\s+$", "").split(" "))
-                                               .collect(toList());
+        int k = Integer.parseInt(nk[1]);
 
-                String loginAttempt = scanner.nextLine();
+        int result = SuperDigitSum.superDigit(n, k);
 
-                String result = PasswordCracker.passwordCracker(passwords, loginAttempt);
-
-                bufferedWriter.write(result);
-                bufferedWriter.newLine();
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            }
-        });
+        bufferedWriter.write(String.valueOf(result));
+        bufferedWriter.newLine();
 
         bufferedWriter.close();
         scanner.close();
